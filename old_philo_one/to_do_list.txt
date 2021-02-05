@@ -1,0 +1,18 @@
+
+|V| : faire des fonctions pour calculer le temps.
+
+|V| : faire les fonctions d'action:
+		|V| eat.	 ||
+		|V| sleep.	 ||
+		|V| think.   \/
+		|X| die.
+
+|V| : faire la fonction d'affichage.
+		-->afficher si pas encore de mort.
+		-->timing.
+
+|V| : fonction pour tester la conditon de running. ( while(running()).. )
+		-->test g_simu.running.
+		-->test si tout les philo on mangé leur nombre de repas si indiqué.
+
+|V| : fonction qui tcheke le dernier repas des philos pour voir si ils sont morts.
