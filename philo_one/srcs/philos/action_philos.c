@@ -6,7 +6,7 @@
 /*   By: tlecoeuv <tlecoeuv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 21:46:39 by tlecoeuv          #+#    #+#             */
-/*   Updated: 2021/03/05 12:25:57 by tlecoeuv         ###   ########.fr       */
+/*   Updated: 2021/03/10 12:46:30 by tlecoeuv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,22 @@ void		philo_think(t_philo *philo)
 
 void		philo_eat(t_philo *philo)
 {
-/*	if ((philo->id % 2) == 0)
+	if ((g_data.nb_philos % 2) == 0)
 	{
-		pthread_mutex_lock(philo->right_fork);
-		print_action(philo, "has taken a fork");
-		pthread_mutex_lock(philo->left_fork);
-		print_action(philo, "has taken a fork");
+		if ((philo->id % 2) == 0)
+		{
+			pthread_mutex_lock(philo->right_fork);
+			print_action(philo, "has taken a fork");
+			pthread_mutex_lock(philo->left_fork);
+			print_action(philo, "has taken a fork");
+		}
+		else
+		{
+			pthread_mutex_lock(philo->left_fork);
+			print_action(philo, "has taken a fork");
+			pthread_mutex_lock(philo->right_fork);
+			print_action(philo, "has taken a fork");
+		}
 	}
 	else
 	{
@@ -47,13 +57,7 @@ void		philo_eat(t_philo *philo)
 		print_action(philo, "has taken a fork");
 		pthread_mutex_lock(philo->right_fork);
 		print_action(philo, "has taken a fork");
-	}*/
-	pthread_mutex_lock(&g_data.waiter);
-	pthread_mutex_lock(philo->left_fork);
-	print_action(philo, "has taken a fork");
-	pthread_mutex_lock(philo->right_fork);
-	print_action(philo, "has taken a fork");
-	pthread_mutex_unlock(&g_data.waiter);
+	}
 	print_action(philo, "is eating");
 	gettimeofday(&philo->last_meal, NULL);
 	philo->nb_meal++;
