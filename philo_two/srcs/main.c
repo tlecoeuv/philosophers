@@ -6,13 +6,23 @@
 /*   By: tlecoeuv <tlecoeuv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 17:54:46 by tlecoeuv          #+#    #+#             */
-/*   Updated: 2021/02/24 19:06:19 by tlecoeuv         ###   ########.fr       */
+/*   Updated: 2021/03/10 16:01:52 by tlecoeuv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
 
 t_data	g_data;
+
+void	init_semaphores(void)
+{
+	sem_unlink("print");
+	sem_unlink("waiter");
+	sem_unlink("forks");
+	g_data.sem_print = sem_open("print", O_CREAT | O_RDWR, 0660, 1);
+	g_data.waiter = sem_open("waiter", O_CREAT | O_RDWR, 0660, 1);
+	g_data.forks = sem_open("forks", O_CREAT | O_RDWR, 0660, g_data.nb_philos);
+}
 
 int		get_input(int argc, char **argv)
 {
@@ -36,17 +46,12 @@ int		get_input(int argc, char **argv)
 	}
 	else
 		return (0);
-	sem_unlink("print");
-	sem_unlink("waiter");
-	sem_unlink("forks");
-	g_data.sem_print = sem_open("print", O_CREAT | O_RDWR, 0660, 1);
-	g_data.waiter = sem_open("waiter", O_CREAT | O_RDWR, 0660, 1);
-	g_data.forks = sem_open("forks", O_CREAT | O_RDWR, 0660, g_data.nb_philos);
 	g_data.running = 1;
+	init_semaphores();
 	return (1);
 }
 
-void		destroy_philos_data(t_philo **philos)
+void	destroy_philos_data(t_philo **philos)
 {
 	int		i;
 
@@ -60,7 +65,6 @@ void		destroy_philos_data(t_philo **philos)
 	sem_unlink("print");
 	sem_unlink("waiter");
 }
-
 
 int		main(int argc, char **argv)
 {

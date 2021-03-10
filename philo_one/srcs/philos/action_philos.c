@@ -6,7 +6,7 @@
 /*   By: tlecoeuv <tlecoeuv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 21:46:39 by tlecoeuv          #+#    #+#             */
-/*   Updated: 2021/03/10 12:46:30 by tlecoeuv         ###   ########.fr       */
+/*   Updated: 2021/03/10 15:07:44 by tlecoeuv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void		philo_think(t_philo *philo)
 	print_action(philo, "is thinking");
 }
 
-void		philo_eat(t_philo *philo)
+void		take_fork(t_philo *philo)
 {
 	if ((g_data.nb_philos % 2) == 0)
 	{
@@ -58,6 +58,11 @@ void		philo_eat(t_philo *philo)
 		pthread_mutex_lock(philo->right_fork);
 		print_action(philo, "has taken a fork");
 	}
+}
+
+void		philo_eat(t_philo *philo)
+{
+	take_fork(philo);
 	print_action(philo, "is eating");
 	gettimeofday(&philo->last_meal, NULL);
 	philo->nb_meal++;

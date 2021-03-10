@@ -6,7 +6,7 @@
 /*   By: tlecoeuv <tlecoeuv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 17:54:46 by tlecoeuv          #+#    #+#             */
-/*   Updated: 2021/02/01 22:17:42 by tlecoeuv         ###   ########.fr       */
+/*   Updated: 2021/03/10 15:00:01 by tlecoeuv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int		get_input(int argc, char **argv)
 	return (1);
 }
 
-void		destroy_philos_data(t_philo **philos)
+void	destroy_philos_data(t_philo **philos)
 {
 	int		i;
 
@@ -56,7 +56,6 @@ void		destroy_philos_data(t_philo **philos)
 	pthread_mutex_destroy(&g_data.waiter);
 	pthread_mutex_destroy(&g_data.mutex_print);
 }
-
 
 int		main(int argc, char **argv)
 {

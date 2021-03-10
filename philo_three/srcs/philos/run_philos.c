@@ -6,7 +6,7 @@
 /*   By: tlecoeuv <tlecoeuv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 21:37:28 by tlecoeuv          #+#    #+#             */
-/*   Updated: 2021/03/05 16:16:30 by tlecoeuv         ###   ########.fr       */
+/*   Updated: 2021/03/10 16:05:49 by tlecoeuv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void		run_philo_process(t_philo *philo)
 
 void		run_philos(t_philo **philos)
 {
-	int		i;
+	int			i;
 	pthread_t	dead_monitor_th;
 	pthread_t	nb_meals_monitor_th;
 

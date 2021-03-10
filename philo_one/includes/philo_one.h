@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo_one.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tlecoeuv <tlecoeuv@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/10 15:56:51 by tlecoeuv          #+#    #+#             */
+/*   Updated: 2021/03/10 15:57:53 by tlecoeuv         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PHILO_ONE_H
 # define PHILO_ONE_H
 
@@ -31,29 +43,20 @@ typedef struct			s_data
 	int					running;
 }						t_data;
 
-//utils:
+int						ft_atoi(const char *str);
+int						ft_isdigit(int c);
+int						ft_isnumber(char *str);
+void					ms_sleep(uint64_t t_ms);
+uint64_t				get_ms_since(struct timeval time);
+int						init_forks(t_philo **philos);
+t_philo					*init_philo(int id);
+t_philo					**init_philos(void);
+void					run_philos(t_philo **philos);
+void					print_action(t_philo *philo, char *action);
+void					philo_sleep(t_philo *philo);
+void					philo_think(t_philo *philo);
+void					philo_eat(t_philo *philo);
 
-int			ft_atoi(const char *str);
-int			ft_isdigit(int c);
-int			ft_isnumber(char *str);
-void		ms_sleep(uint64_t t_ms);
-uint64_t	get_ms_since(struct timeval time);
-
-
-
-//philos:
-
-int			init_forks(t_philo **philos);
-t_philo		*init_philo(int id);
-t_philo		**init_philos(void);
-
-void		run_philos(t_philo **philos);
-
-void		print_action(t_philo *philo, char *action);
-void		philo_sleep(t_philo *philo);
-void		philo_think(t_philo *philo);
-void		philo_eat(t_philo *philo);
-
-extern	t_data		g_data;
+extern	t_data			g_data;
 
 #endif

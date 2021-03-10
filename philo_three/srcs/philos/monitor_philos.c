@@ -6,14 +6,13 @@
 /*   By: tlecoeuv <tlecoeuv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 09:48:33 by tlecoeuv          #+#    #+#             */
-/*   Updated: 2021/03/04 10:32:49 by tlecoeuv         ###   ########.fr       */
+/*   Updated: 2021/03/10 16:05:28 by tlecoeuv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
 
-
-void*		monitor_nb_meals(void *useless)
+void		*monitor_nb_meals(void *useless)
 {
 	int nb_philos_end;
 
@@ -43,7 +42,7 @@ void		post_nb_meals_reached(t_philo *philo)
 	already_post = 1;
 }
 
-void*		monitor_dead(void *useless)
+void		*monitor_dead(void *useless)
 {
 	(void)useless;
 	sem_wait(g_data.philo_die);

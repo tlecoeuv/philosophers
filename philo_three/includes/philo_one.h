@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo_one.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tlecoeuv <tlecoeuv@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/10 16:07:37 by tlecoeuv          #+#    #+#             */
+/*   Updated: 2021/03/10 16:07:40 by tlecoeuv         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PHILO_ONE_H
 # define PHILO_ONE_H
 
@@ -39,37 +51,31 @@ typedef struct			s_data
 	int					running;
 }						t_data;
 
-//utils:
+int						ft_atoi(const char *str);
+int						ft_isdigit(int c);
+int						ft_isnumber(char *str);
+void					ms_sleep(uint64_t t_ms);
+uint64_t				get_ms_since(struct timeval time);
+void					print_resume(t_philo **philos);
 
-int			ft_atoi(const char *str);
-int			ft_isdigit(int c);
-int			ft_isnumber(char *str);
-void		ms_sleep(uint64_t t_ms);
-uint64_t	get_ms_since(struct timeval time);
-void		print_resume(t_philo **philos);
+int						init_forks(t_philo **philos);
+t_philo					*init_philo(int id);
+t_philo					**init_philos(void);
 
+void					*monitor_nb_meals(void *useless);
+void					post_nb_meals_reached(t_philo *philo);
+void					*monitor_dead(void *useless);
+void					post_dead(t_philo *philo);
 
+void					run_philos(t_philo **philos);
+void					run_philo_process(t_philo *philo);
 
-//philos:
+void					*routine(void *philo_ptr);
+void					print_action(t_philo *philo, char *action);
+void					philo_sleep(t_philo *philo);
+void					philo_think(t_philo *philo);
+void					philo_eat(t_philo *philo);
 
-int			init_forks(t_philo **philos);
-t_philo		*init_philo(int id);
-t_philo		**init_philos(void);
-
-void*		monitor_nb_meals(void *useless);
-void		post_nb_meals_reached(t_philo *philo);
-void*		monitor_dead(void *useless);
-void		post_dead(t_philo *philo);
-
-void		run_philos(t_philo **philos);
-void		run_philo_process(t_philo *philo);
-
-void		*routine(void *philo_ptr);
-void		print_action(t_philo *philo, char *action);
-void		philo_sleep(t_philo *philo);
-void		philo_think(t_philo *philo);
-void		philo_eat(t_philo *philo);
-
-extern	t_data		g_data;
+extern	t_data			g_data;
 
 #endif

@@ -6,13 +6,27 @@
 /*   By: tlecoeuv <tlecoeuv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 17:54:46 by tlecoeuv          #+#    #+#             */
-/*   Updated: 2021/03/05 16:16:15 by tlecoeuv         ###   ########.fr       */
+/*   Updated: 2021/03/10 16:04:17 by tlecoeuv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
 
 t_data	g_data;
+
+void	init_semaphores(void)
+{
+	sem_unlink("print");
+	sem_unlink("waiter");
+	sem_unlink("forks");
+	sem_unlink("philo die");
+	sem_unlink("meals done");
+	g_data.sem_print = sem_open("print", O_CREAT | O_RDWR, 0660, 1);
+	g_data.waiter = sem_open("waiter", O_CREAT | O_RDWR, 0660, 1);
+	g_data.forks = sem_open("forks", O_CREAT | O_RDWR, 0660, g_data.nb_philos);
+	g_data.philo_die = sem_open("philo die", O_CREAT | O_RDWR, 0660, 0);
+	g_data.meals_done = sem_open("meals done", O_CREAT | O_RDWR, 0660, 0);
+}
 
 int		get_input(int argc, char **argv)
 {
@@ -36,21 +50,10 @@ int		get_input(int argc, char **argv)
 	}
 	else
 		return (0);
-	sem_unlink("print");
-	sem_unlink("waiter");
-	sem_unlink("forks");
-	sem_unlink("philo die");
-	sem_unlink("meals done");
-	g_data.sem_print = sem_open("print", O_CREAT | O_RDWR, 0660, 1);
-	g_data.waiter = sem_open("waiter", O_CREAT | O_RDWR, 0660, 1);
-	g_data.forks = sem_open("forks", O_CREAT | O_RDWR, 0660, g_data.nb_philos);
-	g_data.philo_die = sem_open("philo die", O_CREAT | O_RDWR, 0660, 0);
-	g_data.meals_done = sem_open("meals done", O_CREAT | O_RDWR, 0660, 0);
-	g_data.running = 1;
 	return (1);
 }
 
-void		destroy_philos_data(t_philo **philos)
+void	destroy_philos_data(t_philo **philos)
 {
 	int		i;
 
@@ -64,7 +67,6 @@ void		destroy_philos_data(t_philo **philos)
 	sem_unlink("print");
 	sem_unlink("waiter");
 }
-
 
 int		main(int argc, char **argv)
 {
