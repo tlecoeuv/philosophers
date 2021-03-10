@@ -10,10 +10,12 @@ SRCS = 	srcs/main.c \
 		srcs/philos/init_philos.c \
 		srcs/philos/run_philos.c \
 		srcs/philos/action_philos.c \
+		srcs/philos/monitor_philos.c \
 		srcs/utils/ft_atoi.c \
 		srcs/utils/ft_isdigit.c \
 		srcs/utils/ft_isnumber.c \
 		srcs/utils/time.c \
+		srcs/utils/print_resume.c \
 
 OBJ = $(SRCS:%.c=%.o)
 

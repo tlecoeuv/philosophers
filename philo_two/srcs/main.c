@@ -6,7 +6,7 @@
 /*   By: tlecoeuv <tlecoeuv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 17:54:46 by tlecoeuv          #+#    #+#             */
-/*   Updated: 2021/02/03 12:18:17 by tlecoeuv         ###   ########.fr       */
+/*   Updated: 2021/02/24 19:06:19 by tlecoeuv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,12 @@ int		get_input(int argc, char **argv)
 	}
 	else
 		return (0);
-	pthread_mutex_init(&g_data.mutex_print, NULL);
-	pthread_mutex_init(&g_data.waiter, NULL);
-	sem_init(&g_data.forks, 0, g_data.nb_philos);
+	sem_unlink("print");
+	sem_unlink("waiter");
+	sem_unlink("forks");
+	g_data.sem_print = sem_open("print", O_CREAT | O_RDWR, 0660, 1);
+	g_data.waiter = sem_open("waiter", O_CREAT | O_RDWR, 0660, 1);
+	g_data.forks = sem_open("forks", O_CREAT | O_RDWR, 0660, g_data.nb_philos);
 	g_data.running = 1;
 	return (1);
 }
@@ -50,9 +53,12 @@ void		destroy_philos_data(t_philo **philos)
 	i = -1;
 	while (++i < g_data.nb_philos)
 		free(philos[i]);
-	sem_destroy(&g_data.forks);
-	pthread_mutex_destroy(&g_data.waiter);
-	pthread_mutex_destroy(&g_data.mutex_print);
+	sem_close(g_data.forks);
+	sem_close(g_data.sem_print);
+	sem_close(g_data.waiter);
+	sem_unlink("forks");
+	sem_unlink("print");
+	sem_unlink("waiter");
 }
 
 

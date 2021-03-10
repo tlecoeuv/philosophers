@@ -6,83 +6,52 @@
 /*   By: tlecoeuv <tlecoeuv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 21:37:28 by tlecoeuv          #+#    #+#             */
-/*   Updated: 2021/02/03 13:45:31 by tlecoeuv         ###   ########.fr       */
+/*   Updated: 2021/03/05 16:16:30 by tlecoeuv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
 
-void		*routine(void *philo_ptr)
+void		run_philo_process(t_philo *philo)
 {
-	t_philo		*philo;
-
-	philo = philo_ptr;
-	while (g_data.running &&
-			(g_data.nb_must_eat == -1 || philo->nb_meal < g_data.nb_must_eat))
+	philo->pid = fork();
+	if (philo->pid == 0)
 	{
-		philo_eat(philo);
-		philo_sleep(philo);
-		philo_think(philo);
-	}
-	return (NULL);
-}
-
-void		monitor_philos(t_philo **philos)
-{
-	int		i;
-	int		count;
-
-	i = 0;
-	count = 0;
-	while (i < g_data.nb_philos)
-	{
-		if ((get_ms_since(philos[i]->last_meal) >= (uint64_t)g_data.time_to_die)
-				&& philos[i]->nb_meal != g_data.nb_must_eat)
+		pthread_create(&philo->th, NULL, &routine, philo);
+		pthread_detach(philo->th);
+		while (g_data.running)
 		{
-			print_action(philos[i], "is dead");
-			g_data.running = 0;
+			post_nb_meals_reached(philo);
+			post_dead(philo);
+			ms_sleep(1);
 		}
-		if (philos[i]->nb_meal == g_data.nb_must_eat)
-			count++;
-		i++;
-	}
-	if (count == g_data.nb_philos)
-		g_data.running = 0;
-}
-
-void		print_resume(t_philo **philos)
-{
-	int		i;
-
-	i = 0;
-	printf("\nRESUME:\n");
-	while (i < g_data.nb_philos)
-	{
-		printf("id: %d nb_meal: %d \n", i, philos[i]->nb_meal);
-		i++;
+		exit(0);
 	}
 }
 
 void		run_philos(t_philo **philos)
 {
 	int		i;
+	pthread_t	dead_monitor_th;
+	pthread_t	nb_meals_monitor_th;
 
 	i = 0;
 	while (i < g_data.nb_philos)
 	{
-		pthread_create(&philos[i]->th, NULL, &routine, philos[i]);
+		run_philo_process(philos[i]);
 		i++;
 	}
+	pthread_create(&dead_monitor_th, NULL, &monitor_dead, philos);
+	pthread_create(&nb_meals_monitor_th, NULL, &monitor_nb_meals, philos);
+	pthread_detach(dead_monitor_th);
+	pthread_detach(nb_meals_monitor_th);
 	while (g_data.running)
-	{
-		monitor_philos(philos);
-		usleep(1000);
-	}
+		ms_sleep(1);
+	printf("yo run boucle\n");
 	i = 0;
 	while (i < g_data.nb_philos)
 	{
-		pthread_join(philos[i]->th, NULL);
+		kill(philos[i]->pid, SIGKILL);
 		i++;
 	}
-	print_resume(philos);
 }

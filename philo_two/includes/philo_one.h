@@ -4,10 +4,14 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <sys/time.h>
+# include <sys/types.h>
+# include <sys/stat.h>
 # include <unistd.h>
 # include <pthread.h>
 # include <stdint.h>
 # include <semaphore.h>
+# include <string.h>
+#include <fcntl.h>
 
 typedef struct			s_philo
 {
@@ -25,9 +29,9 @@ typedef struct			s_data
 	int					time_to_sleep;
 	int					nb_must_eat;
 	struct timeval		start_time;
-	pthread_mutex_t		waiter;
-	pthread_mutex_t		mutex_print;
-	sem_t				forks;
+	sem_t				*waiter;
+	sem_t				*sem_print;
+	sem_t				*forks;
 	int					running;
 }						t_data;
 

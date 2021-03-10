@@ -6,7 +6,7 @@
 /*   By: tlecoeuv <tlecoeuv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 21:37:28 by tlecoeuv          #+#    #+#             */
-/*   Updated: 2021/02/03 13:42:22 by tlecoeuv         ###   ########.fr       */
+/*   Updated: 2021/03/05 12:18:24 by tlecoeuv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,14 +71,7 @@ void		run_philos(t_philo **philos)
 	while (i < g_data.nb_philos)
 	{
 		pthread_create(&philos[i]->th, NULL, &routine, philos[i]);
-		i += 2;
-	}
-	i = 1;
-	ms_sleep(g_data.time_to_eat / 2);
-	while (i < g_data.nb_philos)
-	{
-		pthread_create(&philos[i]->th, NULL, &routine, philos[i]);
-		i += 2;
+		i++;
 	}
 	while (g_data.running)
 	{
@@ -91,5 +84,5 @@ void		run_philos(t_philo **philos)
 		pthread_join(philos[i]->th, NULL);
 		i++;
 	}
-	print_resume(philos);
+//	print_resume(philos);
 }

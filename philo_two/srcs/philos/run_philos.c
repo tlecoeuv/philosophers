@@ -6,7 +6,7 @@
 /*   By: tlecoeuv <tlecoeuv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 21:37:28 by tlecoeuv          #+#    #+#             */
-/*   Updated: 2021/02/03 13:45:31 by tlecoeuv         ###   ########.fr       */
+/*   Updated: 2021/03/05 11:45:13 by tlecoeuv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,5 @@ void		run_philos(t_philo **philos)
 		pthread_join(philos[i]->th, NULL);
 		i++;
 	}
-	print_resume(philos);
+//	print_resume(philos);
 }
