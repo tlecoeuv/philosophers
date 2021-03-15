@@ -6,7 +6,7 @@
 /*   By: tlecoeuv <tlecoeuv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/28 16:34:47 by tlecoeuv          #+#    #+#             */
-/*   Updated: 2021/03/15 16:58:40 by tlecoeuv         ###   ########.fr       */
+/*   Updated: 2021/03/15 17:35:56 by tlecoeuv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void		ms_sleep(uint64_t t_ms)
 	uint64_t	start_sleep_time;
 
 	start_sleep_time = get_ms_since(g_data.start_time);
-	while(get_ms_since(g_data.start_time) - start_sleep_time < t_ms)
+	while (get_ms_since(g_data.start_time) - start_sleep_time < t_ms)
 	{
 		usleep(500);
 	}
