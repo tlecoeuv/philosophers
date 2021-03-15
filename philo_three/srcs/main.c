@@ -6,7 +6,7 @@
 /*   By: tlecoeuv <tlecoeuv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 17:54:46 by tlecoeuv          #+#    #+#             */
-/*   Updated: 2021/03/10 16:04:17 by tlecoeuv         ###   ########.fr       */
+/*   Updated: 2021/03/11 17:30:19 by tlecoeuv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ int		get_input(int argc, char **argv)
 	}
 	else
 		return (0);
+	g_data.running = 1;
+	init_semaphores();
 	return (1);
 }
 
@@ -63,9 +65,13 @@ void	destroy_philos_data(t_philo **philos)
 	sem_close(g_data.forks);
 	sem_close(g_data.sem_print);
 	sem_close(g_data.waiter);
+	sem_close(g_data.philo_die);
+	sem_close(g_data.meals_done);
 	sem_unlink("forks");
 	sem_unlink("print");
 	sem_unlink("waiter");
+	sem_unlink("philo die");
+	sem_unlink("meals done");
 }
 
 int		main(int argc, char **argv)
@@ -74,7 +80,6 @@ int		main(int argc, char **argv)
 
 	if (get_input(argc, argv))
 	{
-		sleep(1);
 		if ((philos = init_philos()))
 		{
 			run_philos(philos);

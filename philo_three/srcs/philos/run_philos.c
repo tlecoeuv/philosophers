@@ -6,7 +6,7 @@
 /*   By: tlecoeuv <tlecoeuv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 21:37:28 by tlecoeuv          #+#    #+#             */
-/*   Updated: 2021/03/10 16:05:49 by tlecoeuv         ###   ########.fr       */
+/*   Updated: 2021/03/11 17:29:00 by tlecoeuv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,14 @@ void		run_philos(t_philo **philos)
 	pthread_detach(dead_monitor_th);
 	pthread_detach(nb_meals_monitor_th);
 	while (g_data.running)
-		ms_sleep(1);
-	printf("yo run boucle\n");
+		usleep(1);
 	i = 0;
 	while (i < g_data.nb_philos)
 	{
 		kill(philos[i]->pid, SIGKILL);
+		sem_post(g_data.meals_done);
 		i++;
 	}
+	sem_post(g_data.philo_die);
+	ms_sleep(1);
 }

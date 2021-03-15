@@ -6,7 +6,7 @@
 /*   By: tlecoeuv <tlecoeuv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 16:07:37 by tlecoeuv          #+#    #+#             */
-/*   Updated: 2021/03/10 16:07:40 by tlecoeuv         ###   ########.fr       */
+/*   Updated: 2021/03/11 16:49:22 by tlecoeuv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <sys/time.h>
 # include <sys/types.h>
 # include <sys/stat.h>
+# include <sys/wait.h>
 # include <unistd.h>
 # include <pthread.h>
 # include <stdint.h>

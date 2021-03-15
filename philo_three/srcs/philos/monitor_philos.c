@@ -6,7 +6,7 @@
 /*   By: tlecoeuv <tlecoeuv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 09:48:33 by tlecoeuv          #+#    #+#             */
-/*   Updated: 2021/03/10 16:05:28 by tlecoeuv         ###   ########.fr       */
+/*   Updated: 2021/03/11 17:29:53 by tlecoeuv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void		*monitor_nb_meals(void *useless)
 	{
 		sem_wait(g_data.meals_done);
 		nb_philos_end++;
-		ms_sleep(1);
+		usleep(1);
 	}
 	g_data.running = 0;
 	return (NULL);
