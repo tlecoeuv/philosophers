@@ -6,7 +6,7 @@
 /*   By: tlecoeuv <tlecoeuv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 21:37:28 by tlecoeuv          #+#    #+#             */
-/*   Updated: 2021/03/11 17:29:00 by tlecoeuv         ###   ########.fr       */
+/*   Updated: 2021/03/15 17:21:52 by tlecoeuv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void		run_philos(t_philo **philos)
 	pthread_detach(dead_monitor_th);
 	pthread_detach(nb_meals_monitor_th);
 	while (g_data.running)
-		usleep(1);
+		ms_sleep(1);
 	i = 0;
 	while (i < g_data.nb_philos)
 	{

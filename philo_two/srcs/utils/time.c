@@ -6,7 +6,7 @@
 /*   By: tlecoeuv <tlecoeuv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/28 16:34:47 by tlecoeuv          #+#    #+#             */
-/*   Updated: 2021/03/15 17:00:30 by tlecoeuv         ###   ########.fr       */
+/*   Updated: 2021/03/15 17:23:59 by tlecoeuv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void		ms_sleep(uint64_t t_ms)
 	{
 		usleep(500);
 	}
+};
 
 uint64_t	get_ms_since(struct timeval time)
 {

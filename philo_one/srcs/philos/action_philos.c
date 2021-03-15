@@ -6,7 +6,7 @@
 /*   By: tlecoeuv <tlecoeuv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 21:46:39 by tlecoeuv          #+#    #+#             */
-/*   Updated: 2021/03/15 10:59:57 by tlecoeuv         ###   ########.fr       */
+/*   Updated: 2021/03/15 17:04:17 by tlecoeuv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,8 @@ void		print_action(t_philo *philo, char *action)
 
 void		philo_sleep(t_philo *philo)
 {
-	uint64_t	diff;
-
-	diff = (get_ms_since(philo->last_meal) - g_data.time_to_sleep);
 	print_action(philo, "is sleeping");
-	ms_sleep(g_data.time_to_sleep - (int)diff);
+	ms_sleep(g_data.time_to_sleep);
 }
 
 void		philo_think(t_philo *philo)

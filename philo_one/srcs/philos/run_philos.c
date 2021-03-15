@@ -6,7 +6,7 @@
 /*   By: tlecoeuv <tlecoeuv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 21:37:28 by tlecoeuv          #+#    #+#             */
-/*   Updated: 2021/03/15 10:57:26 by tlecoeuv         ###   ########.fr       */
+/*   Updated: 2021/03/15 17:20:50 by tlecoeuv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void		run_philos(t_philo **philos)
 	while (g_data.running)
 	{
 		monitor_philos(philos);
-		usleep(1000);
+		ms_sleep(1);
 	}
 	i = -1;
 	while (++i < g_data.nb_philos)
