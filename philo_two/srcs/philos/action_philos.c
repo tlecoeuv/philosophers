@@ -6,7 +6,7 @@
 /*   By: tlecoeuv <tlecoeuv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 21:46:39 by tlecoeuv          #+#    #+#             */
-/*   Updated: 2021/02/24 19:08:57 by tlecoeuv         ###   ########.fr       */
+/*   Updated: 2021/03/15 17:26:36 by tlecoeuv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void		print_action(t_philo *philo, char *action)
 
 	time = get_ms_since(g_data.start_time);
 	if (g_data.running == 1)
-		printf("%8lu %d %s\n", time, philo->id, action);
+		printf("%8llu %d %s\n", time, philo->id, action);
 }
 
 void		philo_sleep(t_philo *philo)
